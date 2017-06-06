@@ -18,6 +18,8 @@ import { Component } from '@angular/core';
           <ul>
             <li *ngFor="let ingredient of this.recipe.ingredients">{{ingredient}}</li>
           </ul>
+          <p><strong>Instructions: </strong>{{recipe.instructions}} </p>
+
 
           <button class="btn btn-primary btn-sm" (click)="showUpdateForm()">Update Recipe</button>
           <hr>
@@ -25,6 +27,8 @@ import { Component } from '@angular/core';
             <h3>Update Recipe</h3>
             <label>Change the Recipe Name</label>
             <input [(ngModel)]="recipe.title">
+            <label>Update Instructions</label>
+            <input [(ngModel)]="recipe.instructions">
             <button class="btn btn-primary btn-sm" (click)="hideUpdateForm()">Done</button>
           </div>
         </div>
@@ -39,8 +43,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   recipes: Recipe[] = [
-    new Recipe ('Avacado Toast', ["bread", "avacado", "salt", "lemon", "pepper"]),
-    new Recipe ('Healthy Cookies', ["oatmeal", "bananas", "chocolate chips"])
+    new Recipe ('Avacado Toast', ["bread", "avacado", "salt", "lemon", "pepper"], "mash avacado wit lemon juice, salt and pepper & apply liberally to toast"),
+    new Recipe ('Healthy Cookies', ["oatmeal", "bananas", "chocolate chips"], "mash bananas, adds and pour in chocolate chips. Bake 10 mins")
   ];
 
   show = null;
@@ -69,5 +73,5 @@ export class AppComponent {
 // Model Declaration //
 export class Recipe {
   showIngredients: boolean = null;
-  constructor(public title: string, public ingredients: string[]) {}
+  constructor(public title: string, public ingredients: string[], public instructions: string) {}
 }
