@@ -6,17 +6,29 @@ import { Component } from '@angular/core';
   template: `
   <div>
     <div class="jumbotron">
-    <h1>Recipe Box</h1>
+      <div class="container">
+        <h1>Recipe Box</h1>
+      </div>
     </div>
     <ul>
-      <div *ngFor="let recipe of recipes"><a href="#" (click)="showDetails(recipe)">{{recipe.title}}</a>
+      <div *ngFor="let recipe of recipes">
+
+        <div *ngIf="recipe.showIngredients == null">
+          <a href="#" (click)="showDetails(recipe)">{{recipe.title}}</a>
+        </div>
+
+        <div *ngIf="recipe.showIngredients">
+          <a href="#" (click)="hideDetails(recipe)">{{recipe.title}}</a>
+        </div>
+
         <div *ngIf="recipe.showIngredients">
           <ul>
             <li *ngFor="let ingredient of this.recipe.ingredients">{{ingredient}}</li>
           </ul>
-          <button (click)="hideDetails(recipe)">Hide Details</button>
         </div>
+
       </div>
+
     </ul>
   </div>
   `,
@@ -45,6 +57,6 @@ export class AppComponent {
 
 // Model Declaration //
 export class Recipe {
-  showIngredients: boolean = false;
+  showIngredients: boolean = null;
   constructor(public title: string, public ingredients: string[]) {}
 }
