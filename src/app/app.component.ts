@@ -9,11 +9,12 @@ import { Component } from '@angular/core';
     <h1>Recipe Box</h1>
     </div>
     <ul>
-      <div (click)="showDetails(recipe)" *ngFor="let recipe of recipes">{{recipe.title}}
+      <div *ngFor="let recipe of recipes"><a href="#" (click)="showDetails(recipe)">{{recipe.title}}</a>
         <div *ngIf="recipe.showIngredients">
           <ul>
             <li *ngFor="let ingredient of this.recipe.ingredients">{{ingredient}}</li>
           </ul>
+          <button (click)="hideDetails(recipe)">Hide Details</button>
         </div>
       </div>
     </ul>
@@ -30,8 +31,16 @@ export class AppComponent {
     new Recipe ('Healthy Cookies', ["oatmeal", "bananas", "chocolate chips"])
   ];
 
+  show = null;
+
   showDetails(recipe) {
     recipe.showIngredients = true;
+    console.log("show deets");
+  }
+
+  hideDetails(recipe) {
+    recipe.showIngredients = null;
+    console.log("clicked");
   }
 
 }
