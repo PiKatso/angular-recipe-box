@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   <div>
     <h1>Recipe Box</h1>
     <ul>
-      <p *ngFor="let thisRecipe of recipies">{{thisRecipe.title}} ~ {{thisRecipe.ingredients}}</p>
+      <p (click)="showIngredients(thisRecipe)" *ngFor="let thisRecipe of recipies">{{thisRecipe.title}} <button (click)="updateRecipe()">Update</button></p>
     </ul>
   </div>
   `,
@@ -21,8 +21,16 @@ export class AppComponent {
     new Recipe ('Avacado Toast', ["bread", "avacado", "salt", "lemon", "pepper"]),
     new Recipe ('Healthy Cookies', ["oatmeal", "bananas", "chocolate chips"])
   ];
-}
 
+  // Event Binding //
+  updateRecipe() {
+    console.log("edit task");
+  }
+
+  showIngredients(recipe) {
+    console.log(recipe.ingredients);
+  }
+}
 
 // Model Declaration //
 export class Recipe {
