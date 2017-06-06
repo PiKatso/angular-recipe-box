@@ -35,12 +35,10 @@ export class AppComponent {
 
   showDetails(recipe) {
     recipe.showIngredients = true;
-    console.log("show deets");
   }
 
   hideDetails(recipe) {
     recipe.showIngredients = null;
-    console.log("clicked");
   }
 
 }
