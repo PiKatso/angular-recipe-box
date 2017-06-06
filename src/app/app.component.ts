@@ -5,9 +5,17 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
   <div>
+    <div class="jumbotron">
     <h1>Recipe Box</h1>
+    </div>
     <ul>
-      <p (click)="showIngredients(thisRecipe)" *ngFor="let thisRecipe of recipies">{{thisRecipe.title}} <button (click)="updateRecipe()">Update</button></p>
+      <div (click)="showDetails(recipe)" *ngFor="let recipe of recipes">{{recipe.title}}
+        <div *ngIf="recipe.showIngredients">
+          <ul>
+            <li *ngFor="let ingredient of this.recipe.ingredients">{{ingredient}}</li>
+          </ul>
+        </div>
+      </div>
     </ul>
   </div>
   `,
@@ -17,22 +25,19 @@ import { Component } from '@angular/core';
 // Class Declaration //
 export class AppComponent {
 
-  recipies: Recipe[] = [
+  recipes: Recipe[] = [
     new Recipe ('Avacado Toast', ["bread", "avacado", "salt", "lemon", "pepper"]),
     new Recipe ('Healthy Cookies', ["oatmeal", "bananas", "chocolate chips"])
   ];
 
-  // Event Binding //
-  updateRecipe() {
-    console.log("edit task");
+  showDetails(recipe) {
+    recipe.showIngredients = true;
   }
 
-  showIngredients(recipe) {
-    console.log(recipe.ingredients);
-  }
 }
 
 // Model Declaration //
 export class Recipe {
+  showIngredients: boolean = false;
   constructor(public title: string, public ingredients: string[]) {}
 }
