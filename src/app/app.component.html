@@ -5,7 +5,7 @@
     </div>
   </div>
     <div *ngFor="let recipe of recipes" class="container">
-      <a *ngIf="recipe.showIngredients == null"href="#" (click)="showDetails(recipe)">{{recipe.title}}</a>
+      <a *ngIf="recipe.showIngredients == null" href="#" (click)="showDetails(recipe)">{{recipe.title}}</a>
 
       <div *ngIf="recipe.showIngredients" class="recipe-item">
         <a href="#" (click)="hideDetails(recipe)">{{recipe.title}}</a>
@@ -14,18 +14,19 @@
         </ul>
         <p><strong>Instructions: </strong>{{recipe.instructions}} </p>
 
+        <button *ngIf="formShow == null" class="btn btn-primary btn-sm" (click)="showUpdateForm()">Update Recipe</button>
 
-        <button class="btn btn-primary btn-sm" (click)="showUpdateForm()">Update Recipe</button>
-        <hr>
         <div *ngIf="formShow">
           <h3>Update Recipe</h3>
           <label>Change the Recipe Name</label>
           <input [(ngModel)]="recipe.title">
+          <br>
           <label>Update Instructions</label>
           <input [(ngModel)]="recipe.instructions">
+          <br>
           <button class="btn btn-primary btn-sm" (click)="hideUpdateForm()">Done</button>
+          <hr>
         </div>
       </div>
-
     </div>
 </div>
