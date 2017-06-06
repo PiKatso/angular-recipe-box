@@ -10,26 +10,26 @@ import { Component } from '@angular/core';
         <h1>Recipe Box</h1>
       </div>
     </div>
-    <ul>
-      <div *ngFor="let recipe of recipes">
+      <div *ngFor="let recipe of recipes" class="container">
+        <a *ngIf="recipe.showIngredients == null"href="#" (click)="showDetails(recipe)">{{recipe.title}}</a>
 
-        <div *ngIf="recipe.showIngredients == null">
-          <a href="#" (click)="showDetails(recipe)">{{recipe.title}}</a>
-        </div>
-
-        <div *ngIf="recipe.showIngredients">
+        <div *ngIf="recipe.showIngredients" class="recipe-item">
           <a href="#" (click)="hideDetails(recipe)">{{recipe.title}}</a>
-        </div>
-
-        <div *ngIf="recipe.showIngredients">
           <ul>
             <li *ngFor="let ingredient of this.recipe.ingredients">{{ingredient}}</li>
           </ul>
+
+          <button class="btn btn-primary btn-sm" (click)="showUpdateForm()">Update Recipe</button>
+          <hr>
+          <div *ngIf="formShow">
+            <h3>Update Recipe</h3>
+            <label>Change the Recipe Name</label>
+            <input [(ngModel)]="recipe.title">
+            <button class="btn btn-primary btn-sm" (click)="hideUpdateForm()">Done</button>
+          </div>
         </div>
 
       </div>
-
-    </ul>
   </div>
   `,
   styleUrls: ['./app.component.css']
@@ -44,13 +44,24 @@ export class AppComponent {
   ];
 
   show = null;
+  formShow = null;
 
   showDetails(recipe) {
+    // this.show = true;
     recipe.showIngredients = true;
   }
 
   hideDetails(recipe) {
+    // this.show = null;
     recipe.showIngredients = null;
+  }
+
+  showUpdateForm() {
+    this.formShow = true;
+  }
+
+  hideUpdateForm() {
+    this.formShow = null;
   }
 
 }
